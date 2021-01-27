@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
 import 'package:thebattle/widgets/CharacterMaster.dart';
+// import 'package:thebattle/widgets/CharacterDetails.dart';
 import 'package:thebattle/data/characters.dart' as staticData;
 
 class AllCharactersPage extends StatefulWidget {
@@ -12,10 +13,26 @@ class AllCharactersPage extends StatefulWidget {
 
 class _AllCharactersPageState extends State<AllCharactersPage> {
   List <Character> allCharacters;
+  Character _selectedCharacter;
 
   _AllCharactersPageState() {
     allCharacters = staticData.characters;
   }
+
+  void _onCharacterSelect(Character character) {
+    setState(() {
+      this._selectedCharacter = character;
+    });
+  }
+
+  // Widget _getCharacterDetails() {
+  //   if (this._selectedCharacter != null) {
+  //     return CharacterDetails(character: this._selectedCharacter);
+  //   }
+  //   else {
+  //     return Container();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +54,15 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: CharacterMaster(characters: allCharacters))
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: _getCharacterDetails(),
+            // ),
+            Expanded(
+              child: CharacterMaster(
+                characters: allCharacters, onSelected: this._onCharacterSelect
+              ),
+            )
           ],
         ),
       ),
