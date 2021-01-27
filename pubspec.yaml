@@ -29,9 +29,11 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
-  flutter_native_splash: ^0.2.6
   flutter_test:
     sdk: flutter
+
+  flutter_native_splash: ^0.2.6
+  flutter_launcher_icons: ^0.8.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -43,7 +45,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/images/the-battle-logo.png
+    - assets/images/characters/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -83,3 +86,8 @@ flutter:
 flutter_native_splash:
   image: assets/images/the-battle-logo-white.png
   color: "#E53935"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/the-battle-icon.png"

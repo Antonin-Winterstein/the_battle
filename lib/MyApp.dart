@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thebattle/pages/MyHomePage.dart';
+import 'package:thebattle/pages/AllCharactersPage.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Knewave',
       ),
-      home: MyHomePage(title: 'THE BATTLE'),
+      home: AllCharactersPage(),
     );
   }
 }
