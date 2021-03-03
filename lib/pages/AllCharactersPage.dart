@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
 import 'package:thebattle/widgets/CharacterMaster.dart';
-// import 'package:thebattle/widgets/CharacterDetails.dart';
+import 'package:thebattle/widgets/CharacterDetails.dart';
 import 'package:thebattle/data/characters.dart' as staticData;
 
 class AllCharactersPage extends StatefulWidget {
@@ -25,14 +25,14 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
     });
   }
 
-  // Widget _getCharacterDetails() {
-  //   if (this._selectedCharacter != null) {
-  //     return CharacterDetails(character: this._selectedCharacter);
-  //   }
-  //   else {
-  //     return Container();
-  //   }
-  // }
+  Widget _getCharacterDetails() {
+    if (this._selectedCharacter != null) {
+      return CharacterDetails(character: this._selectedCharacter);
+    }
+    else {
+      return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +54,10 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: _getCharacterDetails(),
-            // ),
+            SizedBox(
+              width: double.infinity,
+              child: _getCharacterDetails(),
+            ),
             Expanded(
               child: CharacterMaster(
                 characters: allCharacters, onSelected: this._onCharacterSelect

@@ -2,29 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
 
 class CharacterPreview extends StatefulWidget {
-  const CharacterPreview({Key key, this.character, this.onSelected}) : super(key: key);
+  const CharacterPreview({Key key, this.character, this.onSelected, this.visited}) : super(key: key);
 
   final Character character;
   final Function onSelected;
+
+  final bool visited;
 
   @override
   _CharacterPreviewState createState() => _CharacterPreviewState();
 }
 
 class _CharacterPreviewState extends State<CharacterPreview> {
-  bool _selected = false;
-
   _CharacterPreviewState();
 
   Color _getColorAccordingToSelected() {
-    return (_selected) ? Colors.red[300] : Colors.red[400];
+    return (widget.visited) ? Colors.red[300] : Colors.red[400];
   }
 
   void _onTap() {
-    setState(() {
-      _selected = (_selected) ? false : true;
-    });
-
     this.widget.onSelected(this.widget.character);
   }
 

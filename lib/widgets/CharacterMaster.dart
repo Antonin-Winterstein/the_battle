@@ -3,9 +3,10 @@ import 'package:thebattle/models/Character.dart';
 import 'package:thebattle/widgets/CharacterPreview.dart';
 
 class CharacterMaster extends StatefulWidget {
-  const CharacterMaster({Key key, this.characters, this.onSelected}) : super(key: key);
+  const CharacterMaster({Key key, this.characters, this.team, this.onSelected}) : super(key: key);
 
   final List <Character> characters;
+  final List<Character> team;
   final Function onSelected;
 
   @override
@@ -20,7 +21,16 @@ class _CharacterMasterState extends State<CharacterMaster> {
       this._selectedCharacter = character;
     });
 
-    this.widget.onSelected(this._selectedCharacter);
+    widget.onSelected(this._selectedCharacter);
+  }
+
+  bool _isVisited(Character character) {
+    if(_selectedCharacter == null) {
+      return false;
+    }
+    else {
+      return (character.uuid == _selectedCharacter.uuid);
+    }
   }
 
   @override
@@ -32,7 +42,9 @@ class _CharacterMasterState extends State<CharacterMaster> {
         if (index != null) {
           final Character character = widget.characters[index];
 
-          return CharacterPreview(character: character, onSelected: _onCharacterSelect);
+          return CharacterPreview(character: character, onSelected: _onCharacterSelect, visited: _isVisited(
+            character
+          ));
         }
         else {
           return Container();
