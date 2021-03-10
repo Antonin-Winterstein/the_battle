@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
+import 'package:thebattle/models/Player.dart';
+import 'package:thebattle/models/Team.dart';
 import 'package:thebattle/widgets/CharacterMaster.dart';
 import 'package:thebattle/widgets/CharacterDetails.dart';
 import 'package:thebattle/data/characters.dart' as staticData;
+import 'package:thebattle/pages/TeamPage.dart';
 
 class AllCharactersPage extends StatefulWidget {
-  AllCharactersPage({Key key}) : super(key: key);
+  static const String routeName = "/";
+  static const int routeIndex = 0;
+
+  final Player player;
+  final Team team;
+
+  AllCharactersPage({Key key,  this.player, this.team}) : super(key: key);
 
   @override
   _AllCharactersPageState createState() => _AllCharactersPageState();
@@ -21,9 +30,52 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
 
   void _onCharacterSelect(Character character) {
     setState(() {
+      if (this._selectedCharacter == character) this._selectedCharacter = null;
       this._selectedCharacter = character;
     });
   }
+
+///////////////////////
+  void _onCharacterAdded(Character character) {
+    if (widget.player.team.indexOf(character) != -1) {
+      _showAlert('Error', '"${character.name}"is already in your team');
+    }
+    else if (widget.player.team.count() == Team.maxCharactersNumber) {
+      _showAlert('Error', 'There are already ${Team.maxCharactersNumber} characters in your team. You can remove a character from your team to add another.');
+    }
+    else {
+      Navigator.pushReplacementNamed(context, TeamPage.routeName, arguments: character);
+    }
+  }
+
+  Future<void> _showAlert(String title, String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(message),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+    );
+  }
+
+///////////////////////
 
   Widget _getCharacterDetails() {
     if (this._selectedCharacter != null) {

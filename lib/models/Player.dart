@@ -14,5 +14,7 @@ class Player {
     if (gender != 1 && gender != 2) {
       throw new Exception('Gender not found, it must be either 1 if it\'s a male or 2 if it\' a female !');
     }
+
+    this.team = Team('My Team');
   }
 }

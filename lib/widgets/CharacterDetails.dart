@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
+import 'package:thebattle/models/Team.dart';
 
 class CharacterDetails extends StatelessWidget {
-  const CharacterDetails({Key key, this.character}) : super(key: key);
+  const CharacterDetails({Key key, this.character, this.team}) : super(key: key);
 
+  final Team team;
   final Character character;
 
   @override
@@ -63,6 +65,17 @@ class CharacterDetails extends StatelessWidget {
                     color: Colors.red
                   )
                 ),
+                ElevatedButton(onPressed: () {
+                  // print(Team.maxCharactersNumber);
+                  // team.add(this.character);
+                  
+                  // team.count();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
+                child: Text('Add to team'))
               ],
             ),
           )
@@ -71,5 +84,3 @@ class CharacterDetails extends StatelessWidget {
     );
   }
 }
-
-  
