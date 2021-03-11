@@ -42,7 +42,7 @@ class _TheBattleAppState extends State<TheBattleApp> {
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Knewave',
+        // fontFamily: 'Knewave',
       ),
       routes: {
         AllCharactersPage.routeName: (context) => _checkRoute(context, AllCharactersPage.routeName),

@@ -4,6 +4,7 @@ import 'package:thebattle/models/Player.dart';
 import 'package:thebattle/models/Team.dart';
 import 'package:thebattle/widgets/CharacterMaster.dart';
 import 'package:thebattle/widgets/CharacterDetails.dart';
+import 'package:thebattle/widgets/TheBattleBottomNavigationBar.dart';
 import 'package:thebattle/data/characters.dart' as staticData;
 import 'package:thebattle/pages/TeamPage.dart';
 
@@ -12,9 +13,9 @@ class AllCharactersPage extends StatefulWidget {
   static const int routeIndex = 0;
 
   final Player player;
-  final Team team;
+  // final Team team;
 
-  AllCharactersPage({Key key,  this.player, this.team}) : super(key: key);
+  AllCharactersPage({Key key,  this.player}) : super(key: key);
 
   @override
   _AllCharactersPageState createState() => _AllCharactersPageState();
@@ -35,13 +36,12 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
     });
   }
 
-///////////////////////
   void _onCharacterAdded(Character character) {
-    if (widget.player.team.indexOf(character) != -1) {
-      _showAlert('Error', '"${character.name}"is already in your team');
-    }
-    else if (widget.player.team.count() == Team.maxCharactersNumber) {
+    if (widget.player.team.count() == Team.maxCharactersNumber) {
       _showAlert('Error', 'There are already ${Team.maxCharactersNumber} characters in your team. You can remove a character from your team to add another.');
+    }
+    else if (widget.player.team.indexOf(character) != -1) {
+      _showAlert('Error', '"${character.name}" is already in your team come on !');
     }
     else {
       Navigator.pushReplacementNamed(context, TeamPage.routeName, arguments: character);
@@ -64,7 +64,7 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: Text('OK :('),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -75,14 +75,18 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
     );
   }
 
-///////////////////////
-
   Widget _getCharacterDetails() {
     if (this._selectedCharacter != null) {
-      return CharacterDetails(character: this._selectedCharacter);
+      return CharacterDetails(character: this._selectedCharacter, onAdded: this._onCharacterAdded);
     }
     else {
       return Container();
+    }
+  }
+
+  void _onIndexChange(int index) {
+    if (index == TeamPage.routeIndex) {
+      Navigator.pushNamed(context, TeamPage.routeName);
     }
   }
 
@@ -114,9 +118,13 @@ class _AllCharactersPageState extends State<AllCharactersPage> {
               child: CharacterMaster(
                 characters: allCharacters, onSelected: this._onCharacterSelect
               ),
-            )
+            ),
           ],
         ),
+      ),
+      bottomNavigationBar: TheBattleBottomNavigationBar(
+        selectedIndex: AllCharactersPage.routeIndex,
+        onIndexChange: this._onIndexChange
       ),
     );
   }

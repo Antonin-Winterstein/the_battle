@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
-import 'package:thebattle/models/Team.dart';
+// import 'package:thebattle/models/Team.dart';
 
-class CharacterDetails extends StatelessWidget {
-  const CharacterDetails({Key key, this.character, this.team}) : super(key: key);
+class CharacterDetails extends StatefulWidget {
+  const CharacterDetails({Key key, this.character, this.onAdded}) : super(key: key);
 
-  final Team team;
+  // final Team team;
   final Character character;
+  final Function onAdded;
+
+  @override
+  _CharacterDetailsState createState() => _CharacterDetailsState();
+}
+
+class _CharacterDetailsState extends State<CharacterDetails> {
+  void _addCharacterToTeam() {
+    widget.onAdded(widget.character);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +29,7 @@ class CharacterDetails extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  character.name,
+                  widget.character.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Knewave', fontSize: 20, color: Colors.red
@@ -27,7 +37,7 @@ class CharacterDetails extends StatelessWidget {
                 ),
                 Container(
                   child: Image(
-                    image: AssetImage(character.imagePath()),
+                    image: AssetImage(widget.character.imagePath()),
                     width: 100,
                   ),
                 ),
@@ -37,28 +47,28 @@ class CharacterDetails extends StatelessWidget {
           Expanded(
             child: Column(
               children: <Widget>[
-                Text('strength : ${character.strength.value}',
+                Text('strength : ${widget.character.strength.value}',
                   style: TextStyle(
                     fontFamily: 'Knewave',
                     fontSize: 20,
                     color: Colors.red
                   )
                 ),
-                Text('speed : ${character.speed.value}',
+                Text('speed : ${widget.character.speed.value}',
                   style: TextStyle(
                     fontFamily: 'Knewave',
                     fontSize: 20,
                     color: Colors.red
                   )
                 ),
-                Text('cleverness : ${character.cleverness.value}',
+                Text('cleverness : ${widget.character.cleverness.value}',
                   style: TextStyle(
                     fontFamily: 'Knewave',
                     fontSize: 20,
                     color: Colors.red
                   )
                 ),
-                Text('intelligence : ${character.intelligence.value}',
+                Text('intelligence : ${widget.character.intelligence.value}',
                   style: TextStyle(
                     fontFamily: 'Knewave',
                     fontSize: 20,
@@ -66,10 +76,7 @@ class CharacterDetails extends StatelessWidget {
                   )
                 ),
                 ElevatedButton(onPressed: () {
-                  // print(Team.maxCharactersNumber);
-                  // team.add(this.character);
-                  
-                  // team.count();
+                  this._addCharacterToTeam();
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

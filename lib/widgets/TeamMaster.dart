@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
-import 'package:thebattle/widgets/CharacterPreview.dart';
+import 'package:thebattle/widgets/TeamCharacterPreview.dart';
 
-class CharacterMaster extends StatefulWidget {
-  const CharacterMaster({Key key, this.characters, this.onSelected}) : super(key: key);
+class TeamMaster extends StatefulWidget {
+  const TeamMaster({Key key, this.characters, this.onSelected}) : super(key: key);
 
   final List <Character> characters;
   // final List<Character> team;
   final Function onSelected;
 
   @override
-  _CharacterMasterState createState() => _CharacterMasterState();
+  _TeamMasterState createState() => _TeamMasterState();
 }
 
-class _CharacterMasterState extends State<CharacterMaster> {
+class _TeamMasterState extends State<TeamMaster> {
   Character _selectedCharacter;
 
   _onCharacterSelect(Character character) {
@@ -42,7 +42,7 @@ class _CharacterMasterState extends State<CharacterMaster> {
         if (index != null) {
           final Character character = widget.characters[index];
 
-          return CharacterPreview(character: character, onSelected: _onCharacterSelect, visited: _isVisited(
+          return TeamCharacterPreview(character: character, onSelected: _onCharacterSelect, visited: _isVisited(
             character
           ));
         }

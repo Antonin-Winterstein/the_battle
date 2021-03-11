@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
 // import 'package:thebattle/models/Team.dart';
 
-class CharacterPreview extends StatefulWidget {
-  const CharacterPreview({Key key, this.character, this.onSelected, this.visited}) : super(key: key);
+class TeamCharacterPreview extends StatefulWidget {
+  const TeamCharacterPreview({Key key, this.character, this.onSelected, this.visited}) : super(key: key);
 
   final Character character;
   // final Team team;
@@ -12,11 +12,11 @@ class CharacterPreview extends StatefulWidget {
   final bool visited;
 
   @override
-  _CharacterPreviewState createState() => _CharacterPreviewState();
+  _TeamCharacterPreviewState createState() => _TeamCharacterPreviewState();
 }
 
-class _CharacterPreviewState extends State<CharacterPreview> {
-  _CharacterPreviewState();
+class _TeamCharacterPreviewState extends State<TeamCharacterPreview> {
+  _TeamCharacterPreviewState();
 
   Color _getColorAccordingToSelected() {
 
