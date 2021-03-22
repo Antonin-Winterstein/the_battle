@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
-// import 'package:thebattle/models/Team.dart';
+import 'package:thebattle/models/Team.dart';
 
 class TeamCharacterPreview extends StatefulWidget {
-  const TeamCharacterPreview({Key key, this.character, this.onSelected, this.visited}) : super(key: key);
+  const TeamCharacterPreview({Key key, this.character, this.team, this.onSelected}) : super(key: key);
 
   final Character character;
-  // final Team team;
+  final Team team;
   final Function onSelected;
 
-  final bool visited;
+  // final bool visited;
 
   @override
   _TeamCharacterPreviewState createState() => _TeamCharacterPreviewState();
@@ -20,22 +20,52 @@ class _TeamCharacterPreviewState extends State<TeamCharacterPreview> {
 
   Color _getColorAccordingToSelected() {
 
-    if (widget.visited) {
-      return Colors.red[300];
-    }
-    else if (widget.character.autoSelected == true) {
+    if (widget.character.autoSelected == true) {
       return Colors.green[900];
     }
-    else if (widget.character.selected == true) {
-      return Colors.greenAccent[400];
-    }
     else {
-      return Colors.red[400];
+      return Colors.greenAccent[400];
     }
   }
 
-  void _onTap() {
-    this.widget.onSelected(this.widget.character);
+  Future<void> _showAlert(String title, String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(message),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK :('),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+    );
+  }
+
+  void _removeCharacterFromTeam() {
+    if (widget.character.autoSelected) {
+      _showAlert('Error', 'You can\'t remove an autoselected character !');
+    }
+    else {
+      print('selected donc possible d\'enlever !');
+      // print(this.widget.character.name);
+      // widget.onSelected(widget.character);
+      this.widget.onSelected(this.widget.character);
+
+    }
   }
 
   @override
@@ -44,7 +74,7 @@ class _TeamCharacterPreviewState extends State<TeamCharacterPreview> {
       color: _getColorAccordingToSelected(),
       child: ListTile(
         onTap: () {
-          _onTap();
+          _removeCharacterFromTeam();
         },
         leading: Padding(
           padding: EdgeInsets.all(10),

@@ -87,5 +87,4 @@ class Team {
       return false;
     }
   }
-
 }

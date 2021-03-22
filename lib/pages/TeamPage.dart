@@ -64,7 +64,7 @@ class _TeamPageState extends State<TeamPage> {
       ),
     )
     : Text(
-      "Still ${Team.maxCharactersNumber - this.widget.player.team.characters.length} needed",
+      "Still ${Team.maxCharactersNumber - this.widget.player.team.characters.length} characters needed",
       style: TextStyle(
         color: Colors.yellow,
         fontFamily: 'Knewave',
@@ -111,16 +111,9 @@ class _TeamPageState extends State<TeamPage> {
             _validateTeamButtonOrContextualMessage(),
             Expanded(
               child: TeamMaster(
-                // team: this.widget.player.team,
-                // onRemoved: this._onCharacterRemoved
+                team: this.widget.player.team,
+                onRemoved: this._onCharacterRemoved
               ),
-
-
-
-              // child: Container(
-              //   color: Colors.amber,
-              //   width: 100,
-              // ),
             )
           ],
         ),
