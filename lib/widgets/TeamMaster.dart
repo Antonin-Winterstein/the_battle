@@ -25,23 +25,6 @@ class _TeamMasterState extends State<TeamMaster> {
     widget.onRemoved(this._selectedCharacter);
   }
 
-  // _onCharacterRemoved(Character character) {
-  //   setState(() {
-  //     this._selectedCharacter = character;
-  //   });
-
-  //   widget.onRemoved(this._selectedCharacter);
-  // }
-///////////////////////////////////////////////////////////
-  // bool _isVisited(Character character) {
-  //   if(_selectedCharacter == null) {
-  //     return false;
-  //   }
-  //   else {
-  //     return (character.uuid == _selectedCharacter.uuid);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

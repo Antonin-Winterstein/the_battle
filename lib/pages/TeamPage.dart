@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:thebattle/models/Character.dart';
 import 'package:thebattle/models/Player.dart';
 import 'package:thebattle/models/Team.dart';
-import 'package:thebattle/pages/TeamCustomPage.dart';
 import 'package:thebattle/widgets/TeamMaster.dart';
 import 'package:thebattle/pages/AllCharactersPage.dart';
 import 'package:thebattle/widgets/TheBattleBottomNavigationBar.dart';
@@ -25,9 +24,8 @@ class _TeamPageState extends State<TeamPage> {
   _TeamPageState();
 
   void _onCharacterRemoved(Character character) {
-    setState(() {
-      this.widget.player.team.remove(character);
-    });
+    this.widget.player.team.remove(character);
+
 
     final snackBar = SnackBar(content: Text('Character ${character.name} removed'));
 
@@ -42,17 +40,17 @@ class _TeamPageState extends State<TeamPage> {
     }
   }
 
-  void _onValidateTeam() {
+  void _finishTeam() {
     this.widget.player.team.validated = true;
     // Navigator.pushReplacementNamed(context, TeamCustomPage.routeName);
   }
 
-  Widget _validateTeamButtonOrContextualMessage() {
+  Widget _buttonFinishTeamOrNeededCharactersInformations() {
     return (widget.player.team.characters.length == Team.maxCharactersNumber && this.widget.player.team.validated == false) 
     ? RaisedButton(
       color: Colors.green,
       onPressed: () => {
-        this._onValidateTeam()
+        this._finishTeam()
       },
       child: Text(
         "Validate ${this.widget.player.team.name}",
@@ -108,7 +106,7 @@ class _TeamPageState extends State<TeamPage> {
       body: Center(
         child: Column(
           children: [
-            _validateTeamButtonOrContextualMessage(),
+            _buttonFinishTeamOrNeededCharactersInformations(),
             Expanded(
               child: TeamMaster(
                 team: this.widget.player.team,

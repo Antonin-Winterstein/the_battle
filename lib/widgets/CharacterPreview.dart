@@ -18,7 +18,7 @@ class CharacterPreview extends StatefulWidget {
 class _CharacterPreviewState extends State<CharacterPreview> {
   _CharacterPreviewState();
 
-  Color _getColorAccordingToSelected() {
+  Color _backgroundColor() {
 
     if (widget.visited) {
       return Colors.red[300];
@@ -41,7 +41,7 @@ class _CharacterPreviewState extends State<CharacterPreview> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: _getColorAccordingToSelected(),
+      color: _backgroundColor(),
       child: ListTile(
         onTap: () {
           _onTap();

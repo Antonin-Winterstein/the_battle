@@ -18,7 +18,7 @@ class TeamCharacterPreview extends StatefulWidget {
 class _TeamCharacterPreviewState extends State<TeamCharacterPreview> {
   _TeamCharacterPreviewState();
 
-  Color _getColorAccordingToSelected() {
+  Color _backgroundColor() {
 
     if (widget.character.autoSelected == true) {
       return Colors.green[900];
@@ -60,35 +60,52 @@ class _TeamCharacterPreviewState extends State<TeamCharacterPreview> {
       _showAlert('Error', 'You can\'t remove an autoselected character !');
     }
     else {
-      print('selected donc possible d\'enlever !');
-      // print(this.widget.character.name);
-      // widget.onSelected(widget.character);
       this.widget.onSelected(this.widget.character);
-
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: _getColorAccordingToSelected(),
-      child: ListTile(
-        onTap: () {
-          _removeCharacterFromTeam();
-        },
-        leading: Padding(
-          padding: EdgeInsets.all(10),
-          child: Image(
-            image: AssetImage(widget.character.imagePath()),
-            width: 100,
+      color: _backgroundColor(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  widget.character.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Knewave', fontSize: 20, color: Colors.white
+                  ),
+                ),
+                Container(
+                  child: Image(
+                    image: AssetImage(widget.character.imagePath()),
+                    width: 50,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        title: Text(
-          widget.character.name,
-          style: TextStyle(
-            fontFamily: 'Knewave', fontSize: 20, color: Colors.white),
-        ),
-      ),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                ElevatedButton(onPressed: () {
+                  this._removeCharacterFromTeam();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
+                child: Text('Remove'))
+              ],
+            ),
+          )
+        ],
+      )
     );
   }
 }

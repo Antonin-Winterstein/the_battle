@@ -16,7 +16,7 @@ class CharacterMaster extends StatefulWidget {
 class _CharacterMasterState extends State<CharacterMaster> {
   Character _selectedCharacter;
 
-  _onCharacterSelect(Character character) {
+  _selectCharacter(Character character) {
     setState(() {
       this._selectedCharacter = character;
     });
@@ -42,7 +42,7 @@ class _CharacterMasterState extends State<CharacterMaster> {
         if (index != null) {
           final Character character = widget.characters[index];
 
-          return CharacterPreview(character: character, onSelected: _onCharacterSelect, visited: _isVisited(
+          return CharacterPreview(character: character, onSelected: _selectCharacter, visited: _isVisited(
             character
           ));
         }
