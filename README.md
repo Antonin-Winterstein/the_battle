@@ -2,4 +2,6 @@ Projet The Battle réalisé en cours de développement mobile jusqu'au TD4 en Li
 
 <b><i>Étudiants :</i></b><br />
 Antonin Winterstein : <a href="mailto:antonin.winterstein@gmail.com">antonin.winterstein@gmail.com</a><br />
-Yassine Soua : <a href="mailto:souaa.yassine@gmail.com">souaa.yassine@gmail.com</a>
+Yassine Soua : <a href="mailto:souaa.yassine@gmail.com">souaa.yassine@gmail.com</a><br />
+
+Lien GitHub : <a href="https://github.com/Antonin-Winterstein/the_battle">https://github.com/Antonin-Winterstein/the_battle</a><br />
